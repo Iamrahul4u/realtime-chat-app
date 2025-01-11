@@ -16,12 +16,7 @@ app.use(
     credentials: true,
   })
 );
-app.use((req, res, next) => {
-  const { method, url } = req;
-  const timestamp = new Date().toISOString();
-  console.log(`[${timestamp}] ${method} ${url}`);
-  next();
-});
+
 app.use(cookieParser());
 app.use(express.json({ limit: "10mb" }));
 

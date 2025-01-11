@@ -25,6 +25,8 @@ interface AuthStore {
   updateProfile: (data: Partial<AuthUser>) => Promise<void>;
 }
 
+const BASE_URL =
+  import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
 export const useAuthStore = create<AuthStore>((set, get) => ({
   authUser: null,
   isSigningUp: false,
@@ -93,7 +95,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   connectSocket: () => {
     const { authUser } = get();
     if (!authUser || get().socket?.connected) return;
-    const socket = io("http://localhost:5001", {
+    const socket = io(BASE_URL, {
       query: { userId: authUser._id },
     });
 

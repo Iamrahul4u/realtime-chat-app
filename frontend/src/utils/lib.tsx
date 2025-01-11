@@ -1,10 +1,11 @@
 import axios from "axios";
 import { toast } from "sonner";
 
-const ENV = import.meta.env;
-
 export const axiosInstance = axios.create({
-  baseURL: ENV.VITE_NODE_ENV === "development" ? ENV.VITE_BACKEND_URL : "/api",
+  baseURL:
+    import.meta.env.MODE === "development"
+      ? "http://localhost:5001/api"
+      : "/api",
   withCredentials: true,
 });
 
